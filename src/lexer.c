@@ -79,6 +79,21 @@ static LexerTypes lexer_types[] = {
     {"U64", KW_U64},
     {"F64", KW_F64},
 
+
+    ///NEW
+    {"void", KW_U0},
+    {"bool", KW_BOOL},
+    {"sbyte", KW_I8},
+    {"byte", KW_U8},
+    {"short", KW_I16},
+    {"ushort", KW_U16},
+    {"int", KW_I32},
+    {"uint", KW_U32},
+    {"long", KW_I64},
+    {"ulong", KW_U64},
+    {"double", KW_F64},
+    ///
+
     {"auto", KW_AUTO},
 
     {"_extern", KW_ASM_EXTERN},
@@ -95,6 +110,19 @@ static LexerTypes lexer_types[] = {
     {"goto", KW_GOTO},
     {"default", KW_DEFAULT},
     {"return", KW_RETURN},
+
+    ///NEW
+    {"match", KW_SWITCH},
+    //{"case", KW_CASE},
+    //{"break", KW_BREAK},
+    //{"continue", KW_CONTINUE},
+    //{"while", KW_WHILE},
+    //{"do", KW_DO},
+    //{"for", KW_FOR},
+    //{"goto", KW_GOTO},
+    //{"default", KW_DEFAULT},
+    {"ret", KW_RETURN},
+    ///
 
     {"if", KW_IF},
     {"else", KW_ELSE},
@@ -120,6 +148,10 @@ static LexerTypes lexer_types[] = {
     {"#error", KW_PP_ERROR},
     {"#include", KW_PP_INCLUDE},
 
+    ///NEW
+    {"use", KW_PP_INCLUDE},
+    ///
+
     {"cast", KW_CAST},
     {"sizeof", KW_SIZEOF},
     {"inline", KW_INLINE},
@@ -132,6 +164,18 @@ static LexerTypes lexer_types[] = {
     {"union", KW_UNION},
 
     {"static", KW_STATIC},
+
+    ///NEW
+    {"(type)", KW_CAST},       // In C#, casting is done with (Type)
+    {"sizeof", KW_SIZEOF},     
+    {"method", KW_INLINE},      // C# uses methods instead of inline functions
+    {"volatile", KW_VOLATILE},  
+
+    {"pub", KW_PUBLIC},  
+    {"priv", KW_PRIVATE},  
+    {"class", KW_CLASS},  
+    {"struct", KW_UNION},       // C# doesn't have unions, but struct is closest
+    ///
 };
 
 
@@ -427,11 +471,14 @@ char *lexemeToString(Lexeme *tok) {
                 case KW_I64:         aoStrCatPrintf(str,"I64");     break;
                 case KW_U64:         aoStrCatPrintf(str,"U64");     break;
                 case KW_F64:         aoStrCatPrintf(str,"F64");     break;
+            
                 case KW_PUBLIC:      aoStrCatPrintf(str,"public");  break;
+                case KW_PRIVATE:     aoStrCatPrintf(str,"private"); break;
                 case KW_ATOMIC:      aoStrCatPrintf(str,"atomic");  break;
+                case KW_VOLATILE:    aoStrCatPrintf(str,"volatile"); break;
                 case KW_DEFINE:      aoStrCatPrintf(str,"define");  break;
-                case KW_PP_INCLUDE:     aoStrCatPrintf(str,"include"); break;
-                case KW_CAST:        aoStrCatPrintf(str,"cast"); break;
+                case KW_PP_INCLUDE:  aoStrCatPrintf(str,"include"); break;
+                case KW_CAST:        aoStrCatPrintf(str,"cast");    break;
                 case KW_SIZEOF:      aoStrCatPrintf(str,"sizeof");  break;
                 case KW_RETURN:      aoStrCatPrintf(str,"return");  break;
                 case KW_SWITCH:      aoStrCatPrintf(str,"switch");  break;
@@ -441,42 +488,30 @@ char *lexemeToString(Lexeme *tok) {
                 case KW_ASM:         aoStrCatPrintf(str,"asm");     break;
                 case KW_ASM_EXTERN:  aoStrCatPrintf(str,"_extern"); break;
                 case KW_EXTERN:      aoStrCatPrintf(str,"extern");  break;
-                case KW_PRIVATE:     aoStrCatPrintf(str,"private");  break;
                 case KW_INLINE:      aoStrCatPrintf(str,"inline");  break;
                 case KW_FOR:         aoStrCatPrintf(str,"for");     break;
                 case KW_WHILE:       aoStrCatPrintf(str,"while");   break;
-                case KW_VOLATILE:    aoStrCatPrintf(str,"volatile"); break;
+                case KW_DO:          aoStrCatPrintf(str,"do");      break;
                 case KW_GOTO:        aoStrCatPrintf(str,"goto");    break;
                 case KW_IF:          aoStrCatPrintf(str,"if");      break;
                 case KW_ELSE:        aoStrCatPrintf(str,"else");    break;
                 case KW_ELIF:        aoStrCatPrintf(str,"elif");    break;
                 case KW_IF_NDEF:     aoStrCatPrintf(str,"ifndef");  break;
                 case KW_IF_DEF:      aoStrCatPrintf(str,"ifdef");   break;
-                case KW_ELIF_DEF:    aoStrCatPrintf(str,"elifdef");   break;
+                case KW_ELIF_DEF:    aoStrCatPrintf(str,"elifdef"); break;
                 case KW_ENDIF:       aoStrCatPrintf(str,"endif");   break;
                 case KW_UNDEF:       aoStrCatPrintf(str,"undef");   break;
                 case KW_AUTO:        aoStrCatPrintf(str,"auto");    break;
                 case KW_DEFAULT:     aoStrCatPrintf(str,"default"); break;
-                case KW_DO:          aoStrCatPrintf(str,"do");      break;
                 case KW_STATIC:      aoStrCatPrintf(str,"static");  break;
                 case KW_DEFINED:     aoStrCatPrintf(str,"defined"); break;
-
-                case KW_PP_IF: aoStrCatPrintf(str,"#if"); break;   
-                case KW_PP_ELSE: aoStrCatPrintf(str,"#else"); break;   
-                case KW_PP_DEFINE: aoStrCatPrintf(str,"#define"); break;  
-                case KW_PP_IF_NDEF: aoStrCatPrintf(str,"#ifndef"); break; 
-                case KW_PP_IF_DEF: aoStrCatPrintf(str,"#ifdef"); break;
-                case KW_PP_ELIF_DEF:aoStrCatPrintf(str,"#elifdef"); break;
-                case KW_PP_ENDIF: aoStrCatPrintf(str,"#endif"); break;   
-                case KW_PP_ELIF: aoStrCatPrintf(str,"#elif"); break;    
-                case KW_PP_DEFINED: aoStrCatPrintf(str,"#defined"); break; 
-                case KW_PP_UNDEF:  aoStrCatPrintf(str,"#undef"); break;  
-                case KW_PP_ERROR: aoStrCatPrintf(str,"#error"); break;   
-
+        
+            
                 default:
                     loggerPanic("line %d: Keyword %.*s: is not defined\n",
-                            tok->line,tok->len,tok->start);
+                                tok->line,tok->len,tok->start);
             }
+            
             return aoStrMove(str);
         }
     }
