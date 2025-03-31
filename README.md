@@ -103,9 +103,10 @@ SupaC introduces several improvements and modern features over TempleOS HolyC:
 For more details and examples, check out [this guide](https://holyc-lang.com/learn-functions.html).  
 
 
-## Control Flow Graph Example
-Example code:
-```hc
+## Control Flow Graph Example  
+
+### Example Code:  
+<code>
 int Main()
 {
   auto i = 1;
@@ -119,17 +120,26 @@ int Main()
 
   return 1;
 }
-```
-Compiled with: `supac -cfg ./<file>.HC && dot -Tpng ./<file.dot> -o <file>.png`
-Produces the following control flow graph. Note that in order to use 
-`-cfg-png` or `-cfg-svg` it requires the use of [graphviz](https://graphviz.org/)
+</code>  
 
-## Experimental Transpiler
-A transpiler can be invoked using `supac -transpile <file>.HC`, it is best effort 
-however can handle most cases, including assembly. Comments are not preserved
-and some if conditions will require brackets to work correctly
+### Compilation Command:  
+<code>supac -cfg ./&lt;file&gt;.HC && dot -Tpng ./&lt;file&gt;.dot -o &lt;file&gt;.png</code>  
 
-```hc
+This produces a control flow graph for the compiled code. To generate visual outputs using <code>-cfg-png</code> or <code>-cfg-svg</code>, ensure you have [Graphviz](https://graphviz.org/) installed.  
+
+---
+
+## Experimental Transpiler  
+
+The SupaC transpiler can be invoked with:  
+<code>supac -transpile &lt;file&gt;.HC</code>  
+
+It attempts to convert SupaC code into standard C, including inline assembly. However, it does not preserve comments, and some <code>if</code> conditions may require explicit brackets to function correctly.  
+
+### Example:  
+
+#### Input SupaC Code  
+<code>
 asm {
 _TOINT::
     PUSH    RBP
@@ -169,10 +179,10 @@ U0 Main()
   auto num = ToInt(number);
   "%ld\n",num;
 }
-```
+</code>  
 
-Becomes the below:
-```c
+#### Transpiled C Output  
+<code>
 long
 ToInt(unsigned char *str)
 {
@@ -216,22 +226,15 @@ main(void)
     long num = ToInt(number);
     printf("%ld\n", num);
 }
-```
+</code>  
 
-## Bugs
-Please open an issue on [github](https://github.com/Jamesbarford/holyc-lang/issues)
+---
 
-## Inspirations & Resources:
-A lot of the assembly has been cobbled together by running `gcc -S -O0 <file>`
-or `clang -s O0 <file>`. Which has been effective in learning assembly, as 
-has playing with TempleOS. The following are a non-exhaustive list of compilers
-and resources that I have found particularly useful for learning.
-- [TempleOS](https://templeos.org/)
-- [8cc](https://github.com/rui314/8cc)
-- [tcc](http://bellard.org/tcc/)
-- [cc65](https://cc65.github.io/)
-- [shecc](https://github.com/sysprog21/shecc/tree/master)
-- [JS c compiler](https://github.com/Captainarash/CaptCC)
+## Inspirations & Resources  
 
-### Want to ask questions?
-Find me on twitch: https://www.twitch.tv/Jamesbarford
+Additionally, TempleOS has provided valuable insights into low-level compilation. Here are some notable compilers and resources that have been instrumental in learning:  
+
+- [TempleOS](https://templeos.org/)  
+- [HolyC](https://github.com/Jamesbarford/holyc-lang) 
+
+
