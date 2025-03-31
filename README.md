@@ -106,7 +106,7 @@ For more details and examples, check out [this guide](https://holyc-lang.com/lea
 ## Control Flow Graph Example  
 
 ### Example Code:  
-<code>
+```c
 int Main()
 {
   auto i = 1;
@@ -120,7 +120,7 @@ int Main()
 
   return 1;
 }
-</code>  
+```
 
 ### Compilation Command:  
 <code>supac -cfg ./&lt;file&gt;.HC && dot -Tpng ./&lt;file&gt;.dot -o &lt;file&gt;.png</code>  
