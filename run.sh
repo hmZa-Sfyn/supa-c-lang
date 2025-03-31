@@ -1,42 +1,49 @@
-## start and put alias of the lang things
+#!/bin/bash
 
-$pwd = $(pwd)
+set -e  # Exit immediately if a command exits with a non-zero status
+set -u  # Treat unset variables as an error
+set -o pipefail  # Catch errors in piped commands
 
-## copy things to root
+# Define installation paths
+INSTALL_DIR="/usr/local/bin/supac"
+BIN_DIR="$INSTALL_DIR/bin"
+LIBS_DIR="$INSTALL_DIR/libs"
+ENV_FILE="$INSTALL_DIR/supac.env"
 
+# Ensure root privileges
+if [[ $EUID -ne 0 ]]; then
+  echo "This script must be run as root! Use sudo." >&2
+  exit 1
+fi
 
-## create dirs first
-mkdir /usr/local/bin/supac
-mkdir /usr/local/bin/supac/bin
-mkdir /usr/local/bin/supac/libs
+# Create necessary directories if they don't exist
+mkdir -p "$BIN_DIR" "$LIBS_DIR"
 
-## create some files too
-echo $(cat ./run.sh) >> /usr/local/bin/supac/supac.sh
+# Copy files safely
+echo "Copying necessary files..."
+install -m 755 ./supac "$BIN_DIR/"
+install -m 644 -D ./assets "$INSTALL_DIR/assets"
+install -m 644 -D ./stdlib "$LIBS_DIR/"
+install -m 755 ./bin/supac_pm "$BIN_DIR/"
+install -m 755 ./bin/supac_langmang "$BIN_DIR/"
 
-echo "LANGUAGE::VERSION=1.1" >> /usr/local/bin/supac/supac.env
-echo "LANGUAGE::IS_BETA=True" >> /usr/local/bin/supac/supac.env
+# Create environment file
+echo "Setting up environment..."
+echo "LANGUAGE::VERSION=1.1" > "$ENV_FILE"
+echo "LANGUAGE::IS_BETA=True" >> "$ENV_FILE"
 
-## copy them now
-cp ./supac /usr/local/bin/supac/bin/
+# Copy run script safely
+if [[ -f "./run.sh" ]]; then
+  install -m 755 ./run.sh "$INSTALL_DIR/supac.sh"i
 
-cp ./assets /usr/local/bin/supac
-cp ./stdlib /usr/local/bin/supac/libs
+# Add aliases safely to .bashrc and .zshrc
+for shell_config in ~/.bashrc ~/.zshrc; do
+  if [[ -f "$shell_config" ]]; then
+    grep -qxF "alias supacc='$BIN_DIR/supac'" "$shell_config" || echo "alias supacc='$BIN_DIR/supac'" >> "$shell_config"
+    grep -qxF "alias supac='$BIN_DIR/supac_langmang'" "$shell_config" || echo "alias supac='$BIN_DIR/supac_langmang'" >> "$shell_config"
+    grep -qxF "alias papm='$BIN_DIR/supac_pm'" "$shell_config" || echo "alias papm='$BIN_DIR/supac_pm'" >> "$shell_config"
+  fi
+done
 
-cp ./bin/supac_pm /usr/local/bin/supac/bin/
-
-cp ./bin/supac_langmang /usr/local/bin/supac/bin/
-
-## for language itself
-
-echo "alias supacc='/usr/local/bin/supac/bin/supac'" >> ~/.bashrc
-echo "alias supacc='/usr/local/bin/supac/bin/supac'" >> ~/.zshrc
-
-## for language manager
-
-echo "alias supac='/usr/local/bin/supac/bin/supac_langmang'" >> ~/.bashrc
-echo "alias supac='/usr/local/bin/supac/bin/supac_langmang'" >> ~/.zshrc
-
-## for package manager
-
-echo "alias papm='/usr/local/bin/supac/bin/supac_papm'" >> ~/.bashrc
-echo "alias papm='/usr/local/bin/supac/bin/supac_papm'" >> ~/.zshrc
+# Success message
+echo "Installation completed successfully! Please restart your terminal or run: source ~/.bashrc or source ~/.zshrc"
