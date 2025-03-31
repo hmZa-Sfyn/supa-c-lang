@@ -139,7 +139,7 @@ It attempts to convert SupaC code into standard C, including inline assembly. Ho
 ### Example:  
 
 #### Input SupaC Code  
-<code>
+```c
 asm {
 _TOINT::
     PUSH    RBP
@@ -179,10 +179,10 @@ U0 Main()
   auto num = ToInt(number);
   "%ld\n",num;
 }
-</code>  
+``` 
 
 #### Transpiled C Output  
-<code>
+```c
 long
 ToInt(unsigned char *str)
 {
@@ -226,7 +226,7 @@ main(void)
     long num = ToInt(number);
     printf("%ld\n", num);
 }
-</code>  
+```
 
 ---
 
