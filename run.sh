@@ -41,7 +41,7 @@ for shell_config in ~/.bashrc ~/.zshrc; do
   if [[ -f "$shell_config" ]]; then
     grep -qxF "alias supacc='$BIN_DIR/supac'" "$shell_config" || echo "alias supacc='$BIN_DIR/supac'" >> "$shell_config"
     grep -qxF "alias supac='$BIN_DIR/supac_langmang'" "$shell_config" || echo "alias supac='$BIN_DIR/supac_langmang'" >> "$shell_config"
-    grep -qxF "alias papm='$BIN_DIR/supac_pm'" "$shell_config" || echo "alias papm='$BIN_DIR/supac_pm'" >> "$shell_config"
+    grep -qxF "alias scpm='$BIN_DIR/supac_pm'" "$shell_config" || echo "alias papm='$BIN_DIR/supac_pm'" >> "$shell_config"
   fi
 done
 
