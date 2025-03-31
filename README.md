@@ -1,4 +1,4 @@
-# SupaC Programming Language Implementation - BETA
+# SupaC Programming Language - BETA
 
 <p align="center">
   <img 
