@@ -1,5 +1,5 @@
-#include <defs.HH>
-#include <memory.HC>
+#include "/home/hmza/side_projects/supaC/supa-c-lang/stdlib/defs.HH"
+#include "/home/hmza/side_projects/supaC/supa-c-lang/stdlib/memory.HC"
 
 #define BIT_VEC_BITS 32
 
