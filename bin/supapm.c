@@ -144,16 +144,8 @@ void unupload_local(const char *name) {
 }
 
 void print_help() {
-    printf("Usage: supac <command> [arguments]\n");
+    printf("Usage: supapm <command> [arguments]\n");
     printf("Available commands:\n");
-    printf("  --version        Show language version\n");
-    printf("  --is_beta        Show if language is in beta\n");
-    printf("  --llibs          List libraries\n");
-    printf("  env              Show environment variables\n");
-    printf("  env set <key> <value>  Set an environment variable\n");
-    printf("  --plibs          Print path of libraries\n");
-    printf("  --plang          Print path of language bin\n");
-    printf("  --ppm            Print path of package manager\n");
     printf("  create <name>    Create a new project\n");
     printf("  remove <name>    Remove a project\n");
     printf("  upload_local <name> Move project to local libs\n");
