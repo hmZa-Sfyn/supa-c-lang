@@ -86,9 +86,23 @@ void print_path(const char *path) {
     printf("%s\n", path);
 }
 
+void print_help() {
+    printf("Usage: supac <command>\n");
+    printf("Available commands:\n");
+    printf("  --version     Show language version\n");
+    printf("  --is_beta     Show if language is in beta\n");
+    printf("  --llibs       List libraries\n");
+    printf("  env           Show environment variables\n");
+    printf("  env set <key> <value>  Set an environment variable\n");
+    printf("  --plibs       Print path of libraries\n");
+    printf("  --plang       Print path of language bin\n");
+    printf("  --ppm         Print path of package manager\n");
+    printf("  --help        Show this help message\n");
+}
+
 int main(int argc, char *argv[]) {
     if (argc < 2) {
-        printf("Usage: supac <command>\n");
+        print_help();
         return 1;
     }
 
@@ -112,8 +126,11 @@ int main(int argc, char *argv[]) {
         print_path(BIN_DIR);
     } else if (strcmp(argv[1], "--ppm") == 0) {
         print_path(PKG_MANAGER);
+    } else if (strcmp(argv[1], "--help") == 0) {
+        print_help();
     } else {
         printf("Unknown command: %s\n", argv[1]);
+        print_help();
     }
 
     return 0;
