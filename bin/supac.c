@@ -7,8 +7,8 @@
 #define ENV_FILE "/usr/local/bin/supac/supac.env"
 #define LIBS_DIR "/usr/local/bin/supac/libs"
 #define BIN_DIR "/usr/local/bin/supac/bin"
-#define PKG_MANAGER "bin/supac_pm"
-#define LANG_MANAGER "bin/supac_langmang"
+#define PKG_MANAGER "/usr/local/bin/supacbin/supac_pm"
+#define LANG_MANAGER "/usr/local/bin/supacbin/supac_langmang"
 
 void print_version() {
     FILE *file = fopen(ENV_FILE, "r");
