@@ -24,7 +24,8 @@ cp ./stdlib /usr/local/bin/supac/libs
 
 ## for language itself
 
-echo "alias supacc=''"
+echo "alias supacc='/usr/local/bin/supac/bin/supac'" >> ~/.bashrc
+echo "alias supacc='/usr/local/bin/supac/bin/supac'" >> ~/.zshrc
 
 ## for language manager
 
