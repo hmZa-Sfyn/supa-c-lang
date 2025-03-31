@@ -103,7 +103,6 @@ SupaC introduces several improvements and modern features over TempleOS HolyC:
 For more details and examples, check out [this guide](https://holyc-lang.com/learn-functions.html).  
 
 
-
 ## Control Flow Graph Example
 Example code:
 ```hc
