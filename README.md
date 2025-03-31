@@ -65,9 +65,9 @@ ExampleFunction;
 
 ## Using the Compiler  
 
-Once the SupaC compiler has been compiled, it can be used to compile <code>.HC```files. Additional options and features can be displayed by running:  
+Once the SupaC compiler has been compiled, it can be used to compile <code>.HC</code> files. Additional options and features can be displayed by running:  
 
-<code>supac --help``` 
+<code>supac --help</code>  
 
 ---
 
@@ -75,29 +75,29 @@ Once the SupaC compiler has been compiled, it can be used to compile <code>.HC``
 
 SupaC introduces several improvements and modern features over TempleOS HolyC:  
 
-- **<code>auto```Keyword for Type Inference**  
+- **<code>auto</code> Keyword for Type Inference**  
   - Allows automatic type deduction, making code easier to write and read.  
 
 - **Range-Based For Loops**  
   - Can be used with:  
     - Static arrays  
-    - Structs containing an <code>entries```field and a corresponding <code>size```field  
+    - Structs containing an <code>entries</code> field and a corresponding <code>size</code> field  
   - Example:  
-    <code>for (auto it : myArray) { /* Do something */ }``` 
+    <code>for (auto it : myArray) { /* Do something */ }</code>  
 
 - **Flexible Type Casting**  
-  - Supports both <code>cast<type>```and postfix type casting:  
-    <code>auto num = cast<int>(3.14);  // Explicit casting using cast<T>``` 
-    <code>float f = 10;``` 
-    <code>int i = f<int>;  // Postfix type casting``` 
+  - Supports both <code>cast<type></code> and postfix type casting:  
+    <code>auto num = cast<int>(3.14);  // Explicit casting using cast<T></code>  
+    <code>float f = 10;</code>  
+    <code>int i = f<int>;  // Postfix type casting</code>  
 
-- **Support for <code>break```and <code>continue```in Loops**  
-  - Unlike HolyC, SupaC allows <code>break```and <code>continue```statements in loops for better control flow.  
+- **Support for <code>break</code> and <code>continue</code> in Loops**  
+  - Unlike HolyC, SupaC allows <code>break</code> and <code>continue</code> statements in loops for better control flow.  
 
 - **C Library Integration (<code>libc</code>)**  
   - Any standard C library function can be used by declaring its prototype with <code>extern "C"</code>:  
-    <code>extern "C" int printf(const char*, ...);``` 
-    <code>printf("Hello from SupaC!\n");``` 
+    <code>extern "C" int printf(const char*, ...);</code>  
+    <code>printf("Hello from SupaC!\n");</code>  
   - This enables compatibility with existing C codebases.  
 
 For more details and examples, check out [this guide](https://holyc-lang.com/learn-functions.html).  
@@ -123,18 +123,18 @@ int Main()
 ```
 
 ### Compilation Command:  
-<code>supac -cfg ./&lt;file&gt;.HC && dot -Tpng ./&lt;file&gt;.dot -o &lt;file&gt;.png``` 
+<code>supac -cfg ./&lt;file&gt;.HC && dot -Tpng ./&lt;file&gt;.dot -o &lt;file&gt;.png</code>  
 
-This produces a control flow graph for the compiled code. To generate visual outputs using <code>-cfg-png```or <code>-cfg-svg</code>, ensure you have [Graphviz](https://graphviz.org/) installed.  
+This produces a control flow graph for the compiled code. To generate visual outputs using <code>-cfg-png</code> or <code>-cfg-svg</code>, ensure you have [Graphviz](https://graphviz.org/) installed.  
 
 ---
 
 ## Experimental Transpiler  
 
 The SupaC transpiler can be invoked with:  
-<code>supac -transpile &lt;file&gt;.HC``` 
+<code>supac -transpile &lt;file&gt;.HC</code>  
 
-It attempts to convert SupaC code into standard C, including inline assembly. However, it does not preserve comments, and some <code>if```conditions may require explicit brackets to function correctly.  
+It attempts to convert SupaC code into standard C, including inline assembly. However, it does not preserve comments, and some <code>if</code> conditions may require explicit brackets to function correctly.  
 
 ### Example:  
 
