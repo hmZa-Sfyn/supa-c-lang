@@ -63,20 +63,45 @@ ExampleFunction;
 
 - Since SupaC directly compiles to standard x86_64 assembly, it should be compatible with most modern x86_64 processors, including those running Windows (via WSL or MinGW), various Linux distributions, and even BSD-based systems with appropriate toolchains. While ARM and other architectures are not yet supported, future updates may introduce cross-compilation capabilities to expand its reach. 🚀
 
-## Using the compiler
-Once the compiler has been compiled, aside from compiling `.HC` files, more 
-options can be displayed by running `supac --help`
+## Using the Compiler  
 
-## Key Differences between this and TempleOS HolyC
-- `auto` key word for type inference, an addition which makes it easier
-  to write code.
-- Range based for loops can be used with static arrays and structs with 
-  an `entries` field with an accompanying `size` field: `for (auto it : <var>)`
-- `cast<type>` can be used for casting as well as post-fix type casting.
-- `break` and `continue` allowed in loops.
-- You can call any libc code by declaring the prototype with 
-  `extern "c" <type> <function_name>`. Then call the function as you usually
-  would. See [here](https://holyc-lang.com/learn-functions.html) for examples.
+Once the SupaC compiler has been compiled, it can be used to compile <code>.HC</code> files. Additional options and features can be displayed by running:  
+
+<code>supac --help</code>  
+
+---
+
+## Key Differences Between SupaC and TempleOS HolyC  
+
+SupaC introduces several improvements and modern features over TempleOS HolyC:  
+
+- **<code>auto</code> Keyword for Type Inference**  
+  - Allows automatic type deduction, making code easier to write and read.  
+
+- **Range-Based For Loops**  
+  - Can be used with:  
+    - Static arrays  
+    - Structs containing an <code>entries</code> field and a corresponding <code>size</code> field  
+  - Example:  
+    <code>for (auto it : myArray) { /* Do something */ }</code>  
+
+- **Flexible Type Casting**  
+  - Supports both <code>cast<type></code> and postfix type casting:  
+    <code>auto num = cast<int>(3.14);  // Explicit casting using cast<T></code>  
+    <code>float f = 10;</code>  
+    <code>int i = f<int>;  // Postfix type casting</code>  
+
+- **Support for <code>break</code> and <code>continue</code> in Loops**  
+  - Unlike HolyC, SupaC allows <code>break</code> and <code>continue</code> statements in loops for better control flow.  
+
+- **C Library Integration (<code>libc</code>)**  
+  - Any standard C library function can be used by declaring its prototype with <code>extern "C"</code>:  
+    <code>extern "C" int printf(const char*, ...);</code>  
+    <code>printf("Hello from SupaC!\n");</code>  
+  - This enables compatibility with existing C codebases.  
+
+For more details and examples, check out [this guide](https://holyc-lang.com/learn-functions.html).  
+
 
 
 ## Control Flow Graph Example
