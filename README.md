@@ -1,10 +1,10 @@
-# HolyC Programming Language Implementation - BETA
+# SupaCProgramming Language Implementation - BETA
 
 <p align="center">
   <img 
     src="/assets/holyc-logo.png?raw=true"
     alt="alt text"
-    title="holyc logo"
+    title="SupaClogo"
     width="200"
     height="230"/>
 </p>
@@ -23,11 +23,11 @@ Full documentation for the language and this compiler can be found here:
 https://holyc-lang.com/
 
 ## Introduction
-A holyc compiler built from scratch in C. Currently it is non optimising,
+A SupaCcompiler built from scratch in C. Currently it is non optimising,
 walking the AST and compiling it directly to x86_64 assembly code as text which 
 is fed into gcc to assemble. Floating point arithmetic is supported as are most
 of the major language features. There is experimental support for transpiling 
-HolyC to C.
+SupaCto C.
 
 ## Example
 Below is a snippet of code showing some of the features supported by this holyc
@@ -63,7 +63,7 @@ ExampleFunction;
 ```
 
 ## Compatibility
-Currently this holyc compiler will compile holyc source code to an x86_64 
+Currently this SupaCcompiler will compile SupaCsource code to an x86_64 
 compatible binary which has been tested on amd linux and an intel mac.
 Thus most x86_64 architectures should be supported.
 
@@ -116,7 +116,7 @@ make -C ./build
 make -C ./build install
 ```
 
-This will install the compiler and holyc libraries for strings, hashtables, 
+This will install the compiler and SupaClibraries for strings, hashtables, 
 I/O, maths, networking, JSON parsing etc... see ./src/holyc-lib/.
 
 If you would like to include `sqlite3` then please add `-DHCC_LINK_SQLITE3=1`
@@ -162,7 +162,7 @@ Produces the following control flow graph. Note that in order to use
   <img 
     src="/assets/cfg-example.png?raw=true"
     alt="alt text"
-    title="holyc logo"
+    title="SupaClogo"
     width="400"/>
 </p>
 
