@@ -58,69 +58,14 @@ void ExampleFunction(U0)
 ExampleFunction;
 ```
 
-## Compatibility
-Currently this SupaC compiler will compile SupaC source code to an x86_64 
-compatible binary which has been tested on amd linux and an intel mac.
-Thus most x86_64 architectures should be supported.
+# Compatibility 🖥️⚙️
+- The SupaC compiler currently targets x86_64 architectures, generating assembly code that is assembled using GCC. It has been successfully tested on AMD-based Linux systems and Intel-based macOS, ensuring reliable execution across these platforms.
 
-## Building
-### Operating Systems:
-*MacOS & Linux:*
-You should be able to follow the steps below to build and install the compiler.
-
-*Windows:*
-Please install [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) and 
-then follow the steps below:
-
-### Requirements
-- A C compiler, gcc or clang.
-- Linux or MacOS x86_64.
-- make
-- cmake
-
-### Build Steps
-There is a Makefile at the root of the repository that wraps CMake, it provides:
-You can set the install prefix with `make INSTALL_PREFIX=<prefix>`
-
-### Makefile - Simple:
-A Makefile exists at the top of the repo which should simplify building.
-**MacOS:**
-```
-make && make install && make unit-test
-```
-
-**Linux:**
-```
-make && sudo make install && make unit-test
-```
-
-### CMake - Not so simple
-**Create the Makefiles in ./build**
-```
-cmake -S ./src \
-  -B ./build \
-  -G 'Unix Makefiles' \
-  -DCMAKE_C_COMPILER=gcc \
-  -DCMAKE_BUILD_TYPE=Release
-```
-**Compile**
-```
-make -C ./build
-```
-**Install**
-```
-make -C ./build install
-```
-
-This will install the compiler and SupaC libraries for strings, hashtables, 
-I/O, maths, networking, JSON parsing etc... see ./src/holyc-lib/.
-
-If you would like to include `sqlite3` then please add `-DHCC_LINK_SQLITE3=1`
-to either the Makefile or when configuring cmake.
+- Since SupaC directly compiles to standard x86_64 assembly, it should be compatible with most modern x86_64 processors, including those running Windows (via WSL or MinGW), various Linux distributions, and even BSD-based systems with appropriate toolchains. While ARM and other architectures are not yet supported, future updates may introduce cross-compilation capabilities to expand its reach. 🚀
 
 ## Using the compiler
 Once the compiler has been compiled, aside from compiling `.HC` files, more 
-options can be displayed by running `hcc --help`
+options can be displayed by running `supac --help`
 
 ## Key Differences between this and TempleOS HolyC
 - `auto` key word for type inference, an addition which makes it easier
@@ -137,7 +82,7 @@ options can be displayed by running `hcc --help`
 ## Control Flow Graph Example
 Example code:
 ```hc
-I32 Main()
+int Main()
 {
   auto i = 1;
 
@@ -151,19 +96,12 @@ I32 Main()
   return 1;
 }
 ```
-Compiled with: `hcc -cfg ./<file>.HC && dot -Tpng ./<file.dot> -o <file>.png`
+Compiled with: `supac -cfg ./<file>.HC && dot -Tpng ./<file.dot> -o <file>.png`
 Produces the following control flow graph. Note that in order to use 
 `-cfg-png` or `-cfg-svg` it requires the use of [graphviz](https://graphviz.org/)
-<p align="center">
-  <img 
-    src="/assets/cfg-example.png?raw=true"
-    alt="alt text"
-    title="SupaC logo"
-    width="400"/>
-</p>
 
 ## Experimental Transpiler
-A transpiler can be invoked using `hcc -transpile <file>.HC`, it is best effort 
+A transpiler can be invoked using `supac -transpile <file>.HC`, it is best effort 
 however can handle most cases, including assembly. Comments are not preserved
 and some if conditions will require brackets to work correctly
 
