@@ -1,18 +1,18 @@
-# SupaCProgramming Language Implementation - BETA
+# SupaC Programming Language Implementation - BETA
 
 <p align="center">
   <img 
     src="/assets/holyc-logo.png?raw=true"
     alt="alt text"
-    title="SupaClogo"
+    title="SupaC logo"
     width="200"
     height="230"/>
 </p>
 
-_An implementation of Terry A. Davis's HolyC_
+_SupaC: A fork of HolyC implementation of Terry A. Davis's HolyC_
 
 ```hc
-U0 Main()
+void Main()
 {
   "Hello world\n";
 }
@@ -22,12 +22,8 @@ Main;
 Full documentation for the language and this compiler can be found here: 
 https://holyc-lang.com/
 
-## Introduction
-A SupaCcompiler built from scratch in C. Currently it is non optimising,
-walking the AST and compiling it directly to x86_64 assembly code as text which 
-is fed into gcc to assemble. Floating point arithmetic is supported as are most
-of the major language features. There is experimental support for transpiling 
-SupaCto C.
+# Introduction 
+SupaC is a custom-built compiler for the SupaC language, written entirely in C. It currently compiles directly from the abstract syntax tree (AST) to raw x86_64 assembly, which is then assembled using GCC. While it doesn’t yet perform optimizations, it fully supports floating-point arithmetic and most core language features. Additionally, there's experimental support for transpiling SupaC to standard C, opening the door for broader compatibility and further development.
 
 ## Example
 Below is a snippet of code showing some of the features supported by this holyc
@@ -45,7 +41,7 @@ class Person : SomethingWithAnAge
   U8 name[1<<5];
 };
 
-U0 ExampleFunction(U0)
+void ExampleFunction(U0)
 {
   Person *p = MAlloc(sizeof(Person));
 
@@ -63,7 +59,7 @@ ExampleFunction;
 ```
 
 ## Compatibility
-Currently this SupaCcompiler will compile SupaCsource code to an x86_64 
+Currently this SupaC compiler will compile SupaC source code to an x86_64 
 compatible binary which has been tested on amd linux and an intel mac.
 Thus most x86_64 architectures should be supported.
 
@@ -116,7 +112,7 @@ make -C ./build
 make -C ./build install
 ```
 
-This will install the compiler and SupaClibraries for strings, hashtables, 
+This will install the compiler and SupaC libraries for strings, hashtables, 
 I/O, maths, networking, JSON parsing etc... see ./src/holyc-lib/.
 
 If you would like to include `sqlite3` then please add `-DHCC_LINK_SQLITE3=1`
@@ -162,7 +158,7 @@ Produces the following control flow graph. Note that in order to use
   <img 
     src="/assets/cfg-example.png?raw=true"
     alt="alt text"
-    title="SupaClogo"
+    title="SupaC logo"
     width="400"/>
 </p>
 
