@@ -22,6 +22,10 @@ cp ./supac /usr/local/bin/supac/bin/
 cp ./assets /usr/local/bin/supac
 cp ./stdlib /usr/local/bin/supac/libs
 
+cp ./bin/supac_pm /usr/local/bin/supac/bin/
+
+cp ./bin/supac_langmang /usr/local/bin/supac/bin/
+
 ## for language itself
 
 echo "alias supacc='/usr/local/bin/supac/bin/supac'" >> ~/.bashrc
@@ -29,4 +33,10 @@ echo "alias supacc='/usr/local/bin/supac/bin/supac'" >> ~/.zshrc
 
 ## for language manager
 
+echo "alias supac='/usr/local/bin/supac/bin/supac_langmang'" >> ~/.bashrc
+echo "alias supac='/usr/local/bin/supac/bin/supac_langmang'" >> ~/.zshrc
+
 ## for package manager
+
+echo "alias papm='/usr/local/bin/supac/bin/supac_papm'" >> ~/.bashrc
+echo "alias papm='/usr/local/bin/supac/bin/supac_papm'" >> ~/.zshrc
