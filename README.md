@@ -2,7 +2,7 @@
 
 <p align="center">
   <img 
-    src="/assets/holyc-logo.png?raw=true"
+    src="/assets/download.png?raw=true"
     alt="alt text"
     title="SupaC logo"
     width="200"
